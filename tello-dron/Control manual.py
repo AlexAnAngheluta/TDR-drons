@@ -4,6 +4,12 @@ import pygame
 import numpy as np
 import time
 
+"""
+
+Aquest programa fa que hi hagi un control manual del dron
+Mitjançant el teclat de l'ordinador es podrà controlar l'aparell
+
+"""
 
 S = 60
 
@@ -29,7 +35,6 @@ class FrontEnd(object):
         self.screen = pygame.display.set_mode([960, 720])
 
         # Init Tello object that interacts with the Tello drone
-        # 初始化与Tello交互的Tello对象
         self.tello = Tello()
 
 
