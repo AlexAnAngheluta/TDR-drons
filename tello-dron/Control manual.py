@@ -8,6 +8,7 @@ import time
 
 Aquest programa fa que hi hagi un control manual del dron
 Mitjançant el teclat de l'ordinador es podrà controlar l'aparell
+Funcionament correcte del recorregut.
 
 """
 
