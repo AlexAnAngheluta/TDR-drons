@@ -8,7 +8,6 @@ import time
 
 Aquest programa fa que hi hagi un control manual del dron
 Mitjançant el teclat de l'ordinador es podrà controlar l'aparell
-Funcionament correcte del recorregut.
 
 """
 
@@ -18,12 +17,12 @@ FPS = 120
 
 
 class FrontEnd(object):
-    """ Controles
+    """ Controls
             - T: Takeoff
             - L: Land
-            - Flechas: Alante, Atras, Derecha, Izquierrda .
+            - Fletxes: Endavant, Enrere, Dreta, Esquerra.
             - A  D: yaw
-            - W  S: Arriba Abajo.
+            - W  S: Adalt i Abaix.
 
     """
 
