@@ -102,6 +102,12 @@ def iconBatteryDead():
         . # . # .
         . # . # .
         """)
+
+def on_gesture_screen_down():
+    global arm
+    arm = 0
+input.on_gesture(Gesture.SCREEN_DOWN, on_gesture_screen_down)
+
 def calculateBatteryVoltage():
     global batteryMilliVolt
     batteryMilliVolt = Math.round(pins.analog_read_pin(AnalogPin.P0) * batteryFactor * 0.05 + batteryMilliVolt * 0.95)
@@ -114,12 +120,6 @@ def iconBatteryLow():
             . # # # .
             """,
         0)
-
-def on_gesture_screen_down():
-    global arm
-    arm = 0
-input.on_gesture(Gesture.SCREEN_DOWN, on_gesture_screen_down)
-
 buzzer = 0
 arm = 0
 roll = 0

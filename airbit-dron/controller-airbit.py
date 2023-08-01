@@ -4,16 +4,25 @@ Aquest programa es el programa del controlador del dron air:bit
 Prové de la documentació official
 """
 
-def on_button_pressed_a():
-    global Throttle
-    Throttle += -5
-input.on_button_pressed(Button.A, on_button_pressed_a)
-
 def on_gesture_screen_down():
     global Throttle, Arm
     Throttle = 0
     Arm = 0
 input.on_gesture(Gesture.SCREEN_DOWN, on_gesture_screen_down)
+
+def on_button_pressed_a():
+    global Throttle
+    if Throttle < 60:
+        Throttle += -5
+    else:
+        Throttle += -1
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+def on_gesture_shake():
+    global Throttle, Arm
+    Throttle = 0
+    Arm = 0
+input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
 def on_button_pressed_ab():
     global Arm, Throttle
@@ -26,14 +35,11 @@ input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 def on_button_pressed_b():
     global Throttle
-    Throttle += 5
+    if Throttle < 60:
+        Throttle += 5
+    else:
+        Throttle += 1
 input.on_button_pressed(Button.B, on_button_pressed_b)
-
-def on_gesture_shake():
-    global Throttle, Arm
-    Throttle = 0
-    Arm = 0
-input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
 Roll = 0
 Pitch = 0
