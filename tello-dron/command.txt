@@ -1,0 +1,15 @@
+command
+takeoff
+delay 5
+forward 200
+delay 5
+back 200
+delay 5
+left 200
+delay 5
+right 200
+delay 5
+flip l
+delay 5
+flip r
+land
