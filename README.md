@@ -15,3 +15,8 @@
 * "petit comment"
 * "modificació valors"
 * S'han de fer frases curtes
+
+> ## Com s'ha de fer un commit?:
+* git add *
+* git commit -m "Missatge descriptiu"
+* git push
