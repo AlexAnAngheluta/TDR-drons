@@ -1,0 +1,10 @@
+on
+mode 20
+up 4
+hover 3
+fw 5
+bw 5
+lw 5
+rw 5
+down 4
+off
