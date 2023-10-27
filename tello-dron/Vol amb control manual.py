@@ -1,16 +1,8 @@
-from djitellopy import Tello
 import cv2
 import pygame
 import numpy as np
 import time
 
-"""
-
-Aquest programa fa que hi hagi un control manual del dron
-Mitjançant el teclat de l'ordinador es podrà controlar l'aparell
-Funcionament correcte del recorregut.
-
-"""
 
 S = 60
 
@@ -18,12 +10,12 @@ FPS = 120
 
 
 class FrontEnd(object):
-    """ Controles
+    """ Controls
             - T: Takeoff
             - L: Land
-            - Flechas: Alante, Atras, Derecha, Izquierrda .
+            - Flechas: Davant, Enrere, Dreta, Esquerra .
             - A  D: yaw
-            - W  S: Arriba Abajo.
+            - W  S: Amunt Avall.
 
     """
 
@@ -35,7 +27,8 @@ class FrontEnd(object):
         pygame.display.set_caption("Tello cam")
         self.screen = pygame.display.set_mode([960, 720])
 
-        # Init Tello object that interacts with the Tello drone
+        # Inicia camara Tello que interactua amb el drone Tello
+
         self.tello = Tello()
 
 
@@ -99,41 +92,33 @@ class FrontEnd(object):
         self.tello.end()
 
     def keydown(self, key):
-        """ Update velocities based on key pressed
-        Arguments:
-            key: pygame key
-
-        """
-        if key == pygame.K_UP:  # set forward velocity
-            self.for_back_velocity = S
-        elif key == pygame.K_DOWN:  # set backward velocity
+        """ Actualitza les velocitats en funció de la tecla premuda """
+        if key == pygame.K_UP:  # estableix la velocitat d'avanç
+           self.for_back_velocity = S
+        elif key == pygame.K_DOWN:  # estableix la velocitat cap enrere
             self.for_back_velocity = -S
-        elif key == pygame.K_LEFT:  # set left velocity
+        elif key == pygame.K_LEFT:  # estableix la velocitat a l'esquerra
             self.left_right_velocity = -S
-        elif key == pygame.K_RIGHT:  # set right velocity
+        elif key == pygame.K_RIGHT:  # estableix la velocitat cap a la dreta
             self.left_right_velocity = S
-        elif key == pygame.K_w:  # set up velocity
+        elif key == pygame.K_w:  # estableix veolcitat cap amunt
             self.up_down_velocity = S
-        elif key == pygame.K_s:  # set down velocity
+        elif key == pygame.K_s:  # estableix velocitat cap abaix
             self.up_down_velocity = -S
-        elif key == pygame.K_a:  # set yaw counter clockwise velocity
+        elif key == pygame.K_a:  # estableix la velocitat de girada en sentit contrari a les agulles del rellotge
             self.yaw_velocity = -S
-        elif key == pygame.K_d:  # set yaw clockwise velocity
+        elif key == pygame.K_d:  # estableix la velocitat de girada sentit de les agulles del rellotge
             self.yaw_velocity = S
 
     def keyup(self, key):
-        """ Update velocities based on key released
-        Arguments:
-            key: pygame key
-
-        """
-        if key == pygame.K_UP or key == pygame.K_DOWN:  # set zero forward/backward velocity
+        """ Actualitza les velocitats en funció de la tecla alliberada """
+        if key == pygame.K_UP or key == pygame.K_DOWN:  # establiu zero velocitat cap endavant/enrere
             self.for_back_velocity = 0
-        elif key == pygame.K_LEFT or key == pygame.K_RIGHT:  # set zero left/right velocity
+        elif key == pygame.K_LEFT or key == pygame.K_RIGHT: # establiu velocitat esquerra/dreta zero
             self.left_right_velocity = 0
-        elif key == pygame.K_w or key == pygame.K_s:  # set zero up/down velocity
+        elif key == pygame.K_w or key == pygame.K_s:  # establiu zero velocitat cap amunt/baixada
             self.up_down_velocity = 0
-        elif key == pygame.K_a or key == pygame.K_d:  # set zero yaw velocity
+        elif key == pygame.K_a or key == pygame.K_d: # establiu la velocitat de girada zero
             self.yaw_velocity = 0
         elif key == pygame.K_t:  # takeoff
             self.tello.takeoff()
@@ -143,9 +128,7 @@ class FrontEnd(object):
             self.send_rc_control = False
 
     def update(self):
-        """ Update routine. Send velocities to Tello.
-
-        """
+        """ Envia velocitats a Tello. """
         if self.send_rc_control:
             self.tello.send_rc_control(self.left_right_velocity, self.for_back_velocity,
                 self.up_down_velocity, self.yaw_velocity)
